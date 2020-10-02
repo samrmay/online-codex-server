@@ -1,12 +1,14 @@
 import { Router } from "express";
-import users from "./routes/users";
 import codices from "./routes/codices";
+import sessions from "./routes/sessions";
+import users from "./routes/users";
 
 export default () => {
   const router = Router();
 
-  users(router);
   codices(router);
+  sessions(router);
+  users(router);
 
   return router;
 };

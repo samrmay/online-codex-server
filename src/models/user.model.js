@@ -20,6 +20,13 @@ const userSchema = new mongoose.Schema({
   codices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Codex" }],
 });
 
+class UserClass {
+  async compare(password) {
+    return compare(password, this.password);
+  }
+}
+
+userSchema.loadClass(UserClass);
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
     const hashed = await hash(this.password, 10);
