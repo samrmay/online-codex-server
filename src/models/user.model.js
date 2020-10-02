@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 64,
     required: true,
   },
-  manuals: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manual" }],
+  codices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Codex" }],
 });
 
 userSchema.pre("save", async function () {
