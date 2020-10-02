@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import { createSession, deleteSession } from "../../services/session";
 
 const route = express.Router();
@@ -7,12 +7,15 @@ export default (router) => {
   router.use("/sessions", route);
 
   route.get("/", async (req, res) => {
+    if (!req.session.user) {
+      return res.status(404).send("No active session found");
+    }
     return res.status(200).send(req.session.user);
   });
 
   route.post("/", async (req, res) => {
+    console.log(req.body);
     const response = await createSession(req.body);
-
     if (response.userId) {
       req.session.user = { id: response.userId };
       return res.status(response.status).send(req.session.user);

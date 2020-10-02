@@ -14,7 +14,7 @@ const codexSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  entries: [{ name: String, data: String }],
+  entries: [{ name: { type: String, required: true }, data: String }],
 });
 
 export const Codex = mongoose.model("Codex", codexSchema);
