@@ -18,12 +18,13 @@ export default (app) => {
   app.use(
     session({
       cookie: {
-        sameSite: "none",
+        sameSite: "lax",
         httpOnly: true,
         maxAge: Number(process.env.SESSION_TTL),
         secure: process.env.NODE_ENV === "production",
       },
       resave: false,
+      name: process.env.SESSION_NAME,
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,
       store: new MongoStore({

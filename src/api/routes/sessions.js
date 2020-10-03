@@ -14,7 +14,6 @@ export default (router) => {
   });
 
   route.post("/", async (req, res) => {
-    console.log(req.body);
     const response = await createSession(req.body);
     if (response.userId) {
       req.session.user = { id: response.userId };

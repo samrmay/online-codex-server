@@ -16,7 +16,7 @@ export const createSession = async (sessionBody) => {
     return { userId: null, error: "Invalid password", status: 401 };
   }
 
-  return { userId: user._id, error: null, status: 200 };
+  return { userId: user._id, error: null, status: 201 };
 };
 
 export const deleteSession = (session) => {
