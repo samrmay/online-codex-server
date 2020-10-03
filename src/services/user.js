@@ -1,14 +1,18 @@
 import { User } from "../models/user.model";
 
 export const getUser = async (userBody) => {
-  const user = await User.findOne(userBody).select("-password");
+  let user = await User.findOne(userBody)
+    .select("-password, -__v")
+    .populate({ path: "codices", select: "-__v" });
 
   let error = null;
   let status = 200;
   if (!user) {
     error = "User not found";
     status = 404;
+    return { user, error, status };
   }
+
   return { user, error, status };
 };
 
