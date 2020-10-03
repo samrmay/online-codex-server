@@ -2,8 +2,8 @@ import { User } from "../models/user.model";
 
 export const getUser = async (userBody) => {
   let user = await User.findOne(userBody)
-    .select("-password, -__v")
-    .populate({ path: "codices", select: "-__v" });
+    .select("-password -__v")
+    .populate({ path: "codices", select: "name" });
 
   let error = null;
   let status = 200;
@@ -63,7 +63,6 @@ export const addCodices = async (userId, codexArr) => {
 
   const newCodices = user.codices.concat(codexArr);
   user.codices = newCodices;
-  console.log(user.codices);
   user.save();
 
   return { user, error: null, status: 200 };

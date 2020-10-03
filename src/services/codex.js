@@ -2,7 +2,7 @@ import { Codex } from "../models/codex.model";
 import { addCodices, removeCodex } from "./user";
 
 export const getCodex = async (codexBody) => {
-  const codex = await Codex.findOne(codexBody);
+  const codex = await Codex.findOne(codexBody).populate("entries");
 
   let error = null;
   let status = 200;
@@ -24,7 +24,6 @@ export const createCodex = async (codexBody) => {
     status = 409;
   } else {
     const response = await addCodices(codex.owner, [codex._id]);
-    console.log(response);
     if (response.error) {
       error = response.error;
       status = response.status;
@@ -70,8 +69,8 @@ export const addEntries = async (codexId, entryArr) => {
   if (!codex) {
     return { codex, error: "Codex not found", status: 404 };
   }
-  const newEntries = codex.entries.concat(entryArr);
-  codex.entries = newEntries;
+
+  codex.entries = codex.entries.concat(entryArr);
   codex.save();
 
   return { codex, error: null, status: 200 };
