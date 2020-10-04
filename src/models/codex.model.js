@@ -26,10 +26,12 @@ const codexSchema = new mongoose.Schema({
       ],
     },
   ],
-  defaultEntryStructure: {
-    type: [String],
-    validate: (v) => Array.isArray(v) && v.length > 0,
-  },
+  defaultEntryStructure: [
+    {
+      name: { type: String, required: true },
+      dataType: { type: String, required: true },
+    },
+  ],
 });
 
 export const Codex = mongoose.model("Codex", codexSchema);
