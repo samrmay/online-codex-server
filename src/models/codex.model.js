@@ -20,7 +20,10 @@ const codexSchema = new mongoose.Schema({
       dataArr: [
         {
           name: { type: String, required: true },
+          // "String", "Image", "ImageUrl"
           dataType: { type: String, required: true },
+          // "Header", "Body", "Subheader"
+          location: { type: String, required: true },
           data: {},
         },
       ],
@@ -30,6 +33,7 @@ const codexSchema = new mongoose.Schema({
     {
       name: { type: String, required: true },
       dataType: { type: String, required: true },
+      location: { type: String, required: true },
     },
   ],
 });
