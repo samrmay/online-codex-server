@@ -18,7 +18,7 @@ export default (app) => {
   app.use(
     session({
       cookie: {
-        sameSite: "lax",
+        sameSite: "none",
         httpOnly: true,
         maxAge: Number(process.env.SESSION_TTL),
         secure: process.env.NODE_ENV === "production",
