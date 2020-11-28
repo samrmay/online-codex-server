@@ -9,7 +9,10 @@ import routes from "../api";
 export default (app) => {
   app.use(
     cors({
-      origin: "http://localhost:8080",
+      origin: [
+        "http://localhost:8080",
+        "https://online-codex-client.herokuapp.com",
+      ],
       credentials: true,
     })
   );
